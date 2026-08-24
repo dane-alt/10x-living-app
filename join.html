@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Join — 10X Living</title>
+  <link rel="stylesheet" href="css/app.css" />
+</head>
+<body>
+<header>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="join.html">Join</a>
+    <a href="constitution.html">Constitution</a>
+    <a href="checkin.html">Check-in</a>
+    <a href="roles.html">Roles</a>
+  </nav>
+</header>
+<main>
+  <h1>Join</h1>
+  <p>Watch the video (same idea as the hexagon on 10xliving.org). Then the form.</p>
+  <div class="video">Put the joining video here (YouTube or file URL).</div>
+  <form id="join">
+    <label>Name <input name="name" required /></label>
+    <label>Email <input type="email" name="email" required /></label>
+    <label>Why this culture? <textarea name="why" rows="4" required></textarea></label>
+    <p>Fit, 1–10 (10 = very much)</p>
+    <label>Trauma-literate community matters to me <input type="number" name="trauma" min="1" max="10" value="5" /></label>
+    <label>Shared meals and gardens matter to me <input type="number" name="meals" min="1" max="10" value="5" /></label>
+    <label>I want purpose with elders and children nearby <input type="number" name="purpose" min="1" max="10" value="5" /></label>
+    <label><input type="checkbox" name="constitution" required style="display:inline;width:auto" /> I have read the <a href="constitution.html">constitution</a> (the fence, not a parent).</label>
+    <button class="btn" type="submit">Send interest</button>
+  </form>
+  <p id="thanks" hidden>Saved on this device for now. A human will not be spammed. Dane only signs contracts.</p>
+</main>
+<footer>Only metric: well-being per minute of attention. Close the tab when life is happening.</footer>
+<script>
+document.getElementById("join").addEventListener("submit", function (e) {
+  e.preventDefault();
+  const data = Object.fromEntries(new FormData(e.target).entries());
+  const all = JSON.parse(localStorage.getItem("tenx-joins") || "[]");
+  all.push({ ...data, at: new Date().toISOString() });
+  localStorage.setItem("tenx-joins", JSON.stringify(all));
+  document.getElementById("thanks").hidden = false;
+  e.target.hidden = true;
+});
+</script>
+</body>
+</html>
