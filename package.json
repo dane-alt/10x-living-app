@@ -1,0 +1,6 @@
+{
+  "name": "10x-living-app",
+  "private": true,
+  "description": "Well-being culture app. Not an engagement product.",
+  "scripts": { "test": "node tests/checkin.test.js" }
+}
